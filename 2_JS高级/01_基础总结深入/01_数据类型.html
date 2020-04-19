@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>01_数据类型</title>
+</head>
+
+<body>
+</body>
+
+<!--
+1. 数据类型有哪些分类？
+  * 基本(值)类型
+    * String: 任意字符串
+    * Number: 任意的数字，整数、小数、正数、负数等等。。
+    * Boolean: true/false
+    * undefined: undefined
+    * null: null
+
+  * 对象(引用)类型
+    * Object: 任意对象
+    * Function: 一种特别的对象(可以执行)
+    * Array: 一种特别的对象(数值下标, 内部数据是有序的)
+
+2. 如何判断数据类型
+  * typeof:
+    * 可以判断: undefined/ 数值Number / 字符串String / 布尔值Boolean / function
+    * 不能判断: null与object  object与array
+  
+  * instanceof:
+    * 判断对象的具体类型
+  
+ * ===
+    * 可以判断: undefined, null
+-->
+<script>
+  // 1.基本数据类型的判断
+
+  var a;
+  console.log(a);
+  // undefined
+
+  // MARK: 如何知道这个 a 的数据类型
+  console.log(typeof a);
+  // 返回 'undefined'
+
+
+  // MARK: typeof 
+  /*
+  typeof 是一个运算符，
+  有2种使用方式：typeof(表达式)和typeof 变量名，
+  第一种是对表达式做运算，第二种是对变量做运算。
+
+  typeof运算符的返回类型为字符串
+  */
+
+
+  // MARK: 如何判断一个变量是否是 undefined
+  console.log(typeof a === undefined); // 错误，不能这样判断，因为 typeof a 返回的是字符串
+  console.log(typeof a === 'undefined'); // 正确，可以这样判断，因为 typeof a 返回的是字符串
+  console.log(a === undefined); // 正确，可以这样判断
+
+  // 不能用 instanceof 来判断一个变量是否是 undefined
+  // TypeError: Right-hand side of 'instanceof' is not an object
+  // console.log(a instanceof undefined);
+
+
+  a = 3;
+  console.log(typeof a);
+  // 返回 'number'
+
+  // MARK: 如何判断一个变量是否是 Number
+  console.log(typeof a === 'number'); // 正确，可以这样判断
+
+
+  a = "hello";
+  console.log(typeof a);
+  // 返回 'string'
+
+  // MARK: 如何判断一个变量是否是 String
+  console.log(typeof a === 'string'); // 正确，可以这样判断
+
+
+  a = true;
+  console.log(typeof a);
+  // 返回 'boolean'
+  // MARK: 如何判断一个变量是否是 Boolean
+  console.log(typeof a === 'boolean'); // 正确，可以这样判断
+
+
+  a = null;
+  console.log(typeof a);
+  // 返回 'object'
+  // 这个是js历史遗留问题，将null作为object类型处理)
+
+  // MARK: 如何判断一个变量是否是 null
+  console.log(typeof a === 'null'); // 错误，不能这样判断，typeof a 返回的是 object
+  console.log(a === null); // 正确，可以这样判断
+
+
+  // MARK: 其实能够用 === 来判断的只有两种 undefined, null
+  // 因为这两种类型 undefined, null 的变量的值，是唯一的。
+</script>
+
+
+<script>
+  // 2.对象(引用)类型的判断
+  var b1 = {
+    b2: [1, 'abc', console.log],
+    b3: function () {
+      console.log('b3')
+      return function () {
+        return 'xfzhang'
+      }
+    }
+  };
+
+  /*
+  b1 是一个对象 Object
+  b2 是一个数组 Array，也是 Object
+  b3 是一个函数 Function，也是 Object
+
+  b2的第二个元素，console.log 是一个函数 Function
+  */
+
+  // MARK: instanceof 
+  /*
+  instanceof 是一个运算符，
+  instanceof 运算符的返回类型为布尔类型
+  */
+
+
+  // 按照字面意思：b1 是不是 Object 的一个实例？
+  console.log(b1 instanceof Object); // 正确，返回 true
+  console.log(b1 instanceof Array); // 正确，返回  false
+
+
+  // 说明 Array 是 对象(引用)类型
+  console.log(b1.b2 instanceof Array, b1.b2 instanceof Object); // true true
+
+
+  // 说明 Function 是 对象(引用)类型
+  console.log(b1.b3 instanceof Function, b1.b3 instanceof Object) // true true
+
+
+  console.log(typeof b1.b2); // 返回 'object'
+  console.log(typeof b1.b2 === 'array'); // 错误，不能这样判断，因为typeof b1.b2 返回的是 'object'
+  console.log("判断是否是数组用这个", Array.isArray(b1.b2));
+
+
+  console.log(typeof b1.b3); // 返回 'function'
+  // 所以 函数可以这样判断
+  console.log(typeof b1.b3 === 'function'); // 正确，可以这样判断，返回true
+  console.log(typeof b1.b2[2] === 'function'); // 正确，可以这样判断，返回true
+</script>
+
+<script>
+  var b1 = {
+    b2: [1, 'abc', console.log],
+    b3: function () {
+      console.log('b3')
+      return function () {
+        return 'xfzhang';
+      }
+    }
+  };
+
+  /*
+  b2的第二个元素，console.log 是一个函数 Function
+  */
+
+  console.log(typeof b1.b2[2] === 'function'); // 正确，可以这样判断，返回true
+
+  // b2的第二个元素，执行这个函数
+  b1.b2[2](333); // 输出 333
+
+  // 如何得到 xfzhang
+  var hhh = b1.b3();
+  console.log(hhh());
+</script>
+
+</html>
