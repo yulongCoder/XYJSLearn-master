@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>02_数据_变量_内存3</title>
+</head>
+
+<body>
+</body>
+
+<!-- 
+  关于引用类型的变量赋值问题
+  * 2个引用变量指向同一个对象, 通过一个变量修改对象内部数据, 另一个变量看到的是修改之后的数据
+  * 2个引用变量指向同一个对象, 让其中一个引用变量指向另一个对象, 另一引用变量依然指向前一个对象
+ -->
+<script>
+  var obj1 = {
+    name: 'Tom'
+  };
+
+  // 变量 obj2 和 变量obj1 指向同一个对象 {name: 'Tom'};
+  var obj2 = obj1;
+
+  // 修改 obj2，
+  obj2.age = 12;
+
+  // 那么 obj1 也会被修改
+  console.log(obj1.age);
+  // 12
+
+  function fn(obj) {
+    obj.name = 'A'
+  }
+
+  // 修改 obj1
+  fn(obj1);
+
+  // 那么 obj2 也会被修改
+  console.log(obj2.name);
+  //A
+</script>
+
+
+<script>
+  var obj1 = {
+    name: 'Tom'
+  };
+  // 变量 obj2 和 变量obj1 指向同一个对象 {name: 'Tom'};
+  var obj2 = obj1;
+
+  var obj3 = {gender: true};
+  // 将 obj1 指向 obj3 
+  obj1 = obj3;
+  console.log(obj1);
+  console.log(obj3);
+
+  // obj2 并不受影响，不会改变；
+  console.log(obj2);
+</script>
+
+
+</html>
