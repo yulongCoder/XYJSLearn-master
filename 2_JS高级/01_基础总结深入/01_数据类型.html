@@ -27,13 +27,13 @@
 2. 如何判断数据类型
   * typeof:
     * 可以判断: undefined/ 数值Number / 字符串String / 布尔值Boolean / function
-    * 不能判断: null与object  object与array
+    * 不能判断: null 与 object 、 array 与 object；因为 typeof 表达式对空对象和数组打印出来的都是object
   
   * instanceof:
     * 判断对象的具体类型
   
  * ===
-    * 可以判断: undefined, null
+    * 只可以判断: undefined, null
 -->
 <script>
   // 1.基本数据类型的判断
@@ -156,6 +156,7 @@
   console.log(typeof b1.b2[2] === 'function'); // 正确，可以这样判断，返回true
 </script>
 
+<!-- 做个练习 -->
 <script>
   var b1 = {
     b2: [1, 'abc', console.log],
