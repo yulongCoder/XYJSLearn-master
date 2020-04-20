@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>03_对象</title>
+</head>
+
+<body>
+</body>
+
+
+<!-- 
+1. 什么是对象?
+  * 多个数据的封装体
+  * 用来保存多个数据的容器
+  * 一个对象代表现实中的一个事物
+
+  在软件系统中，对象具有唯一的标识符，对象包括属性（Properties）和方法（Methods），
+  属性就是需要记忆的信息，方法就是对象能够提供的服务。
+  在面向对象（Object Oriented）的软件中，对象（Object）是某一个类（Class）的实例（Instance）。 
+
+
+2. 为什么要用对象?
+  * 统一管理多个数据
+
+3. 对象的组成
+  * 属性: 属性名(字符串)和属性值(任意)组成
+  * 方法: 一种特别的属性(属性值是函数)
+
+4. 如何访问对象内部数据?
+  * .属性名: 编码简单, 有时不能用
+  * ['属性名']: 编码麻烦, 能通用
+
+
+ -->
+<script>
+  var p = {
+    name: 'Tom',
+    age: 12,
+    setName: function (name) {
+      this.name = name
+    },
+    setAge: function (age) {
+      this.age = age
+    }
+  };
+
+  p.setName('Bob');
+
+  // 访问属性 ['属性名']: 编码麻烦, 能通用
+  p['setAge'](23);
+  console.log(p.name, p['age']);
+</script>
+
+</html>
