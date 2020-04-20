@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>02_内存管理</title>
+</head>
+
+<body>
+</body>
+
+
+<!--
+问题: JS引擎如何管理内存?
+1. 内存生命周期
+  * 分配小内存空间, 得到它的使用权
+  * 存储数据, 可以反复进行操作
+  * 释放小内存空间
+  
+2. 释放内存
+  * 局部变量: 函数执行完自动释放
+  * 对象: 成为垃圾对象==>垃圾回收器回收
+ -->
+<script>
+
+  var a = 3; // 分配内存，变量a在栈内存中，系统自己管理，变量a是全局变量，没有被释放
+  var obj = {}; // 分配内存，变量obj在栈内存中，变量obj存储的是 {}对象的内存地址；  {}对象在堆内存中，程序员手动管理；
+  // 变量obj是全局变量，没有被释放；被释放的是{}
+
+  obj = null;
+  // 释放内存；注意是否的是{} 对象；至于 变量a，变量 obj 还是全局变量，依然在内存中；
+
+  obj = undefined;
+
+
+  function fn() {
+    var b = {}
+  }
+  fn() // b是自动释放, b所指向的对象是在后面的某个时刻由垃圾回收器回收
+
+</script>
+
+</html>
