@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>01_原型(prototype)</title>
+</head>
+
+<body>
+</body>
+
+<!-- 
+1. 函数的prototype属性(图)
+  * 每个函数都有一个prototype属性, 它默认指向一个Object空对象(即称为: 原型对象)
+  * 原型对象中有一个属性constructor, 它指向函数对象
+2. 给原型对象添加属性(一般都是方法)
+  * 作用: 函数的所有实例对象自动拥有原型中的属性(方法)
+ -->
+<script>
+  // 每个函数都有一个 prototype 属性, 它默认指向一个Object空对象(即称为: 原型对象)
+  console.log(Date.prototype);
+  // {constructor: ƒ, toString: ƒ, toDateString: ƒ, toTimeString: ƒ, toISOString: ƒ, …}
+
+  console.log(typeof Date.prototype);
+  // 输出 object，说明是一个 object 对象
+
+
+  function Fun() {}
+  console.log(Fun.prototype);
+  // 默认指向一个Object空对象(没有我们的属性)
+
+  console.log(typeof Fun.prototype);
+  // object
+
+
+  // 原型对象中有一个属性constructor, 它指向函数对象
+  console.log(Date.prototype.constructor === Date);
+  console.log(Fun.prototype.constructor === Fun);
+
+
+  // 给原型对象添加属性(一般是方法) ===>实例对象可以访问
+  // 添加属性
+  Fun.prototype.age = 12;
+
+  // 添加方法
+  Fun.prototype.setAge = function (age) {
+    this.age = age;
+  }
+
+  // 添加方法
+  Fun.prototype.test = function () {
+    console.log('test()')
+  }
+
+  // 函数的所有实例对象自动拥有原型中的属性(方法)
+  var fun = new Fun();
+  fun.test();
+  console.log(fun.age);
+  fun.setAge(23);
+  console.log(fun.age);
+</script>
+
+</html>
