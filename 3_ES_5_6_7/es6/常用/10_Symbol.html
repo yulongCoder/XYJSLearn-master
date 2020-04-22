@@ -86,6 +86,45 @@
   const Person_KEY = Symbol('Person_KEY');
   console.log(Person_KEY);
   // Symbol(Person_KEY)
+
+
+
+  // - Symbol.iterator
+  //  * 对象的Symbol.iterator属性，指向该对象的默认遍历器方法
+
+  // 等同于在指定的数据内结构上部署了 iterator 接口
+  // 当使用 for of 去遍历某一个结构的时候，首先去找Symbol.iterator，找到了就遍历，没有找到的话不能遍历
+  let targetData = {
+    [Symbol.iterator]: function () {
+      let nextIndex = 0; // 记录指针的位置
+      return { // 返回遍历器对象
+        next: function () {
+
+          return nextIndex < this.length ? {
+            value: this[nextIndex++],
+            done: false
+          } : {
+            value: undefined,
+            done: true
+          };
+
+        }
+      };
+    }
+  };
+
+
+  // 使用三点运算符，解构赋值，默认去调用 iterator 接口
+  let arr2 = [1, 6];
+  let arr3 = [2, 3, 4, 5];
+
+  // 就是...arr3，真实的是调用 iterator 接口来解构的；
+  arr2 = [1, ...arr3, 6];
+  console.log(arr2);
+
+  // 就是解构，也是调用 iterator 接口来解构的；
+  let [a, b] = arr3;
+  console.log(a, b);
 </script>
 
 </html>
