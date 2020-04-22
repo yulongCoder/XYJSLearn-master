@@ -94,6 +94,18 @@
   func(1, 5, 9, "abc");
 
 
+
+  // 使用解构赋值以及...三点运算符时会调用iterator接口
+  let arr1 = [1, 2, 3, 4, 5];
+
+  // 就是...arr2，真实的是调用 iterator 接口来解构的；
+  let [value1, ...arr2] = arr1;
+
+  // 就是解构，也是调用 iterator 接口来解构的；
+  let [a, b] = arr1;
+  console.log('a和b==',a, b);
+
+
   // 对象 obj 不可以用 for of
   let obj = {
     username: 'bill',
@@ -104,6 +116,8 @@
   //   console.log('iterator==', iterator);
   // }
 
+
+  
 </script>
 
 </html>
