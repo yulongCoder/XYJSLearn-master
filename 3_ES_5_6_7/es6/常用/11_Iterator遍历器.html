@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>11_Iterator遍历器</title>
+</head>
+
+<body>
+
+</body>
+
+<!--
+概念： iterator是一种接口机制，为各种不同的数据结构提供统一的访问机制
+作用：
+  1、为各种数据结构，提供一个统一的、简便的访问接口；
+  2、使得数据结构的成员能够按某种次序排列
+  3、ES6创造了一种新的遍历命令for...of循环，Iterator接口主要供for...of消费。
+工作原理：
+  - 创建一个指针对象，指向数据结构的起始位置。
+  - 第一次调用next方法，指针自动指向数据结构的第一个成员
+  - 接下来不断调用next方法，指针会一直往后移动，直到指向最后一个成员
+  - 每调用next方法返回的是一个包含value和done的对象，{value: 当前成员的值,done: 布尔值}
+    * value表示当前成员的值，done对应的布尔值表示当前的数据的结构是否遍历结束。
+    * 当遍历结束的时候返回的value值是undefined，done值为false
+原生具备iterator接口的数据(可用for of遍历)
+  1、Array
+  2、arguments
+  3、set容器
+  4、map容器
+  5、String
+  。。。
+  -->
+<script>
+  // 模拟指针对象（遍历器对象）
+  // 自定义iterator生成指针对象
+  function mockIterator(arr) {
+    let nextIndex = 0; // 记录指针的位置
+    return { // 返回遍历器对象
+      next: function () {
+        return nextIndex < arr.length ? {
+          value: arr[nextIndex++],
+          done: false
+        } : {
+          value: undefined,
+          done: true
+        };
+      }
+    };
+  }
+
+  let arr = [1, 2, 3, 4, 5];
+  let iteratorObj = mockIterator(arr);
+  console.log(iteratorObj.next());
+  console.log(iteratorObj.next());
+  console.log(iteratorObj.next());
+  console.log(iteratorObj.next());
+  console.log(iteratorObj.next());
+
+  // 表示最后一个了
+  console.log(iteratorObj.next()); // {value: undefined, done: true}
+</script>
+
+
+<!-- 
+  上面是模拟这个机制，
+  下面，将 iterator 接口部署到指定的数据类型上，可以使用 for of去循环遍历；
+  // 数组、字符串、arguments伪数组、set容器、map容器；
+  // 普通 Object 对象不行
+ -->
+<script>
+  // 原生测试  数组
+  let arr3 = [1, 2, 'kobe', true];
+  for (let i of arr3) {
+    console.log('i===', i);
+  }
+
+  // 字符串  string
+  let str = 'abcdefg';
+  for (let item of str) {
+    console.log('item==', item);
+  }
+
+
+  // 你看，伪数组，可以用 for of
+  // 真数组，可以用 for of；
+  // 字符串可以用  for of；
+  function func() {
+    for (const iterator of arguments) {
+      console.log('iterator==', iterator);
+    }
+  }
+  func(1, 5, 9, "abc");
+
+
+  // 对象 obj 不可以用 for of
+  let obj = {
+    username: 'bill',
+    age: 17
+  };
+  // 报错 obj is not iterable
+  // for (const iterator of obj) {
+  //   console.log('iterator==', iterator);
+  // }
+
+</script>
+
+</html>
