@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>02_JSON对象</title>
+</head>
+
+<body>
+
+</body>
+
+<!--
+1. JSON.stringify(obj/arr)
+  * js对象(数组)转换为json对象(数组)
+2. JSON.parse(json)
+  * json对象(数组)转换为js对象(数组)
+
+-->
+<script type="text/javascript">
+  var obj = {
+    name: 'kobe',
+    age: 39
+  };
+  obj = JSON.stringify(obj);
+
+  // string 类型的 json 对象
+  console.log(typeof obj);
+  console.log(obj);
+
+  obj = JSON.parse(obj);
+  console.log(obj);
+</script>
+
+</html>
