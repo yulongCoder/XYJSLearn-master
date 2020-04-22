@@ -53,11 +53,16 @@
   // 扩展运算符
   let arr = [2, 3, 4, 5, 6];
   let arr1 = ['abc', ...arr, 'fg'];
-  console.log(arr1);
+  console.log('arr1==', arr1);
   // (7) ["abc", 2, 3, 4, 5, 6, "fg"]
 
+  console.log('arr==', arr);
+  // (5) [2, 3, 4, 5, 6]
+
+
+  // 相当于会自动遍历 arr，拿到每一项数组中的元素
   console.log(...arr);
-  console.log(arr);
+  // 2 3 4 5 6
 
 </script>
 
