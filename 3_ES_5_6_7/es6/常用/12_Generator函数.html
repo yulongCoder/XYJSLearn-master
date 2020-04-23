@@ -71,17 +71,33 @@
 
 <script>
   // 对象的Symbol.iterator属性;
-  let myIterable = {};
-  myIterable[Symbol.iterator] = function* () {
+  let person = {
+    username: 'hello',
+    age: 18
+  };
+
+  for (let pro in person) {
+    console.log('pro==', pro);
+    console.log('value==', person[pro]);
+  }
+
+  // 普通的Obj对象，for of 不能遍历
+  // for (let pro of person) {
+  //   console.log('pro==', pro);
+  //   console.log('value==', person[pro]);
+  // }
+
+  // 普通的Obj对象，加上这个后， 用 for of 就能遍历了
+  person[Symbol.iterator] = function* () {
     yield 1;
     yield 2;
     yield 4;
   };
-  for (let i of myIterable) {
-    console.log(i);
+  for (let i of person) {
+    console.log('i===', i);
   }
-  let obj = [...myIterable];
-  console.log(obj);
+  let obj = [...person];
+  console.log(person);
 
   console.log('-------------------------------');
 </script>
@@ -100,11 +116,11 @@
    * */
   function* sendXml() {
     // url为next传参进来的数据
-    let url = yield getNews('http://localhost:3000/news?newsId=2');
-    yield getNews(url);
+    let url = yield getRequestData('https://api-hmugo-web.itheima.net/api/public/v1/home/swiperdata');
+    yield getRequestData(url);
   }
 
-  function getNews(url) {
+  function getRequestData(url) {
     $.get(url, function (data) {
       console.log(data);
       let commentsUrl = data.commentsUrl;
