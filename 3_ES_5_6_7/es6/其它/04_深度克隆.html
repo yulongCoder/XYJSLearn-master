@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>04_深度克隆</title>
+</head>
+
+<body>
+
+</body>
+
+
+<!--
+  1、数据类型：
+    * 数据分为基本的数据类型(String, Number, boolean, Null, Undefined)和对象数据类型
+    - 基本数据类型：
+      特点： 存储的是该对象的实际数据
+    - 对象数据类型：
+      特点： 存储的是该对象在栈中引用，真实的数据存放在堆内存里
+  2、复制数据
+    - 基本数据类型存放的就是实际的数据，可直接复制
+      let number2 = 2;
+      let number1 = number2;
+    - 克隆数据：对象/数组
+      1、区别： 浅拷贝/深度拷贝
+         判断： 拷贝是否产生了新的数据还是拷贝的是数据的引用
+         知识点：对象数据存放的是对象在栈内存的引用，直接复制的是对象的引用
+         let obj = {username: 'kobe'}
+         let obj1 = obj; // obj1 复制了obj在栈内存的引用
+      2、常用的拷贝技术
+        1). arr.concat(): 数组浅拷贝
+        2). arr.slice(): 数组浅拷贝
+        3). JSON.parse(JSON.stringify(arr/obj)): 数组或对象深拷贝, 但不能处理函数数据
+        4). 浅拷贝包含函数数据的对象/数组
+        5). 深拷贝包含函数数据的对象/数组
+-->
+<script>
+  // 说明是深拷贝
+  let str = 'abc';
+  let str2 = str;
+  console.log(str); // abc
+  console.log(str2); // abc
+
+  str2 = 'a';
+
+  console.log(str); // abc
+  console.log(str2); // a
+
+
+  // 说明还是深拷贝
+  let bool1 = true;
+  let bool2 = bool1;
+
+  console.log(bool1); // true
+  console.log(bool2); // true
+
+  bool2 = false;
+
+  console.log(bool1); // true
+  console.log(bool2); // false
+</script>
+
+
+<!-- 
+对象/数组
+拷贝后不会生成新的数据，而是拷贝该对象的引用，修改拷贝以后的数据会影响原来的数据，就是浅拷贝；
+拷贝数据的方法
+  /*
+  1 直接赋值给一个变量，（浅拷贝）
+  2 Object.assign(); (浅拷贝)
+  3 Array.prototype.concat(); (浅拷贝)
+  4 Array.prototype.slice(); (浅拷贝)
+  5 JSON.parse(); JSON.stringfy();  深拷贝，拷贝的数据里不能有函数，因为处理不了；
+
+  浅拷贝（对象/数组）：拷贝的是引用，修改拷贝后的数据，会影响原来的数据；
+  深拷贝：拷贝时生成新的数据，修改拷贝以后的数据不会影响原数据；
+
+  */
+ -->
+<script>
+  let object = {
+    username: 'kobe',
+    sex: {
+      option1: '男',
+      option2: '女'
+    }
+  };
+
+  let object2 = {};
+  object2 = object;
+
+  console.log('--------');
+
+  console.log('object==', object);
+  console.log('object2==', object2);
+  object2.username = 'kkkk';
+  console.log('object==', object);
+  console.log('object2==', object2);
+  // 这个直接赋值是浅拷贝
+</script>
+
+
+<!-- 
+  FIXME： Object.assign 有可能是深拷贝，也有可能是浅拷贝；
+ -->
+<script>
+  let obj = {
+    username: 'kobe',
+    sex: {
+      option1: '男',
+      option2: '女'
+    }
+  };
+
+  // Object.assign();  浅拷贝
+  let obj2 = {};
+  Object.assign(obj2, obj);
+  console.log('----分割线----');
+  console.log('obj==', obj);
+  console.log('obj2==', obj2);
+  obj2.username = 'www'; // 修改复制的对象没有影响到原来的对象
+  console.log('obj==', obj);
+  console.log('obj2==', obj2);
+
+
+  let obj3 = {};
+  Object.assign(obj3, obj);
+  console.log('obj==', obj);
+  console.log('obj3==', obj3);
+  obj3.sex.option1 = 'XXXX'; // 修改复制的对象会影响原对象
+  console.log('obj==', obj);
+  console.log('obj3==', obj3);
+</script>
+
+
+<script>
+  // 说明是浅拷贝
+  let arr = [1, 4, {
+    username: 'kkk'
+  }];
+  let arr2 = arr;
+  console.log('arr==', arr);
+  console.log('arr2==', arr2);
+  arr2[0] = 'abcd';
+  console.log('arr==', arr);
+  console.log('arr2==', arr2);
+</script>
+
+<script>
+  let array1 = [10, 40, {
+    username: 'hhh'
+  }];
+
+  // (浅拷贝)
+  let array2 = array1.slice();
+  console.log('array1==', array1);
+  console.log('array2==', array2);
+
+  array2[2].username = 'ppp';
+  console.log('array1==', array1);
+  console.log('array2==', array2);
+</script>
+
+
+<script>
+  let tempArr1 = [10, 40, {
+    username: 'hhh'
+  }];
+
+  // 深拷贝
+  let tempArr2 = JSON.parse(JSON.stringify(tempArr1));
+  console.log('tempArr1==', tempArr1);
+  console.log('tempArr2==', tempArr2);
+
+  tempArr2[2].username = 'hello';
+  console.log('tempArr1==', tempArr1);
+  console.log('tempArr2==', tempArr2);
+</script>
+
+</html>
