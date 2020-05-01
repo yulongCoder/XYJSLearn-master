@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = [8, 7, 6, 8, 0, 1, 2, 3, 4, 4, 4, 5, 5, 6, 6];
+        console.log("arr==" + arr);
+
+        // var result = unique(arr);
+        // console.log("result==" + result);
+
+        var result2 = getUniqueArr(arr);
+        console.log("result2==" + result2);
+        console.log("arr==" + arr);
+
+
+        // 去除数组中重复的元素
+        function unique(arr) {
+            var result = [];
+            var isRepeated = false;
+
+            for (var i = 0; i < arr.length; i++) {
+                isRepeated = false;
+                for (var j = 0; j < result.length; j++) {
+                    if (arr[i] == result[j]) {
+                        isRepeated = true;
+                        break;
+                    }
+                }
+                if (!isRepeated) {
+                    result.push(arr[i]);
+                }
+            }
+            return result;
+        }
+
+
+        function getUniqueArr(arr) {
+            // var result = arr;
+
+            for (var i = 0; i < arr.length; i++) {
+                for (var j = i + 1; j < arr.length; j++) {
+                    // 判断两个元素是否相等
+                    if (arr[i] == arr[j]) {
+                        // 如果相等则证明出现了重复的元素，则删除j对应的元素
+                        arr.splice(j, 1);
+
+                        // 当删除了j所在的元素后，后面的元素会自动补位，
+                        // 此时将不会在比较这个元素，我需要再比较一次j所在位置的元素；
+                        // 使j自减
+                        j--;
+                    }
+
+                }
+            }
+            return arr;
+        }
+
+
+    </script>
+</body>
+
+</html>
+
+
+
