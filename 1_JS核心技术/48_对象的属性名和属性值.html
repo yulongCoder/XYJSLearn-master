@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+         属性名
+         - 对象的属性名不强制要求遵守标识符的规范，
+         什么乱七八糟的名字都可以使用，
+         但是我们还是尽量按照标识符的规范使用；
+         */
+        var obj = new Object();
+        obj.var = "hello";
+        console.log("obj.var==" + obj.var);
+
+
+        // 如果使用特殊的属性名，不能采用.的操作方式
+        // obj.123 = 789;
+
+        // 使用 [] 这种形式去操作属性，更加的灵活
+        // 这样是可以的
+        obj["123"] = 789;
+        console.log("==" + obj["123"]); // ==789
+
+        // 在 [] 中可以直接传递一个变量，
+        var value = "123";
+        var b = obj[value];
+        console.log("==" + b); // ==789
+
+
+        /*
+         属性值
+         JS 对象的属性值，可以是任意类型数据，甚至也可以是一个对象
+         */
+        var obj2 = new Object();
+        obj2.name = "猪";
+
+        // 将 obj2 设置为 obj
+        obj.test = obj2;
+        console.log("obj.test==" + obj.test); // obj.test==[object Object]
+
+
+        /*
+         in 运算符
+         通过该运算符可以检查一个对象中是否含有指定的属性，
+         如果有则返回 true，没有则返回 false
+         语法："属性名" in 对象
+         */
+        var isHasProperty = "test2" in obj;
+        var isHasProperty2 = "test" in obj;
+        console.log("isHasProperty==" + isHasProperty); // isHasProperty==false
+        console.log("isHasProperty2==" + isHasProperty2); // isHasProperty2==true
+    </script>
+
+</body>
+
+</html>
