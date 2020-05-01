@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script type="text/javascript">
+		/*
+		 * 电子邮件
+		 * 	hello  .nihao          @     abc  .com.cn
+		 * 
+		 * 任意字母数字下划线    .任意字母数字下划线  @   任意字母数字     .任意字母（2-5位）   .任意字母（2-5位）
+		 * 
+		 * \w{3,}  (\.\w+)*  @  [A-z0-9]+  (\.[A-z]{2,5}){1,2}
+		 */
+
+
+		/*
+		任意字母数字下划线,三位以上
+		\w{3,}
+
+		.和(任意字母数字下划线)一个以上
+		\.\w+
+
+		(\.\w+)* 表示 (\.\w+) 是0个以上
+		
+
+		[A-z0-9]+ 表示任意字母数字一个以上
+
+		*/
+
+
+		var emailReg = /\w{3,}(\.\w+)*@[A-z0-9]+(\.[A-z]{2,5}){1,2}/;
+
+
+		console.log(emailReg.test("abc.hello@163.com"));
+		// true
+
+		console.log(emailReg.test("abc.hello163.com"));
+		// false
+
+		// 那么是哪里出问题了呢，是没有限制左边和右边
+		// 这个不是邮箱格式
+		console.log(emailReg.test("abc.hello@163.com.123"));
+		// true
+
+		// 那么是哪里出问题了呢，是没有限制左边和右边
+		// 这个不是邮箱格式
+		console.log(emailReg.test("@118286@qq.com"));
+		// true
+		console.log("分割=====");
+
+
+		// MARK: 限制左边和右边
+		emailReg = /^\w{3,}(\.\w+)*@[A-z0-9]+(\.[A-z]{2,5}){1,2}$/;
+
+		console.log(emailReg.test("abc.hello@163.com.123"));
+		// false
+
+		console.log(emailReg.test("@118286@qq.com"));
+		// false
+
+		console.log(emailReg.test("118286@qq.com"));
+		// true
+	</script>
+</head>
+
+<body>
+</body>
+
+</html>
