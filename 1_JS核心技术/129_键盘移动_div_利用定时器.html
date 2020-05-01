@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>123_键盘移动_div_利用定时器</title>
+	<style type="text/css">
+		#box1 {
+			width: 100px;
+			height: 100px;
+			background-color: red;
+			position: absolute;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function () {
+
+			/* MARK: 使div可以根据不同的方向键向不同的方向移动
+			 * 按左键，div向左移
+			 * 按右键，div向右移
+			 * 。。。
+			 */
+
+
+			// 定义一个变量，来表示移动的速度
+			var speed = 10;
+			var keyCode;
+
+			setInterval(function () {
+				moveDivBox(keyCode, speed);
+			}, 30);
+
+			//为document绑定一个按键按下的事件
+			document.onkeydown = function (event) {
+				event = event || window.event;
+				// 当用户按了alt以后，速度加快
+				if (event.altKey) {
+					speed = 500;
+				}
+
+				keyCode = event.keyCode;
+			};
+
+			// 当按键松开时，div不再移动
+			document.onkeyup = function (event) {
+				keyCode = null;
+			};
+		};
+
+
+		/**
+		 * direction 移动的方向，37 左，38 上，39 右，40 下
+		 * speed 移动的速度，移动一次的距离
+		 */
+		function moveDivBox(direction, speed) {
+			var box1 = document.getElementById("box1");
+			switch (direction) {
+				case 37: {
+					console.log("向左");
+					box1.style.left = box1.offsetLeft - speed + "px";
+					break;
+				}
+				case 38: {
+					console.log("向上");
+					box1.style.top = box1.offsetTop - speed + "px";
+					break;
+				}
+				case 39: {
+					console.log("向右");
+					box1.style.left = box1.offsetLeft + speed + "px";
+					break;
+				}
+				case 40: {
+					console.log("向下");
+					box1.style.top = box1.offsetTop + speed + "px";
+					break;
+				}
+				default:
+					break;
+			}
+		};
+	</script>
+</head>
+
+<body>
+	<div id="box1"></div>
+</body>
+
+</html>
