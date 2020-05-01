@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>110_其他样式相关的属性</title>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		#box1 {
+			width: 100px;
+			height: 100px;
+			background-color: red;
+			padding: 10px;
+			border: 10px solid yellow;
+		}
+
+		#box2 {
+			padding: 30px;
+			background-color: purple;
+		}
+
+		#box4 {
+			width: 200px;
+			height: 300px;
+			background-color: green;
+			overflow: auto;
+		}
+
+		#box5 {
+			width: 450px;
+			height: 600px;
+			background-color: blue;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function () {
+			var box1 = document.getElementById("box1");
+			var btn01 = document.getElementById("btn01");
+			btn01.onclick = function () {
+
+
+				/* MARK: clientWidth 和 clientHeight
+				 * 	- 这两个属性可以获取元素的可见宽度和可见高度
+				 * 	- 这些属性都是不带px的，返回都是一个数字，可以直接进行计算
+				 * 	- 会获取元素宽度和高度，包括内容区和内边距
+				 *  - 这些属性都是只读的，不能修改
+				 */
+				console.log("box1.clientWidth==" + box1.clientWidth);
+				// box1.clientWidth==120
+
+				console.log("box1.clientHeight==" + box1.clientHeight);
+				// box1.clientHeight==120
+
+				// 这些属性都是只读的，不能修改
+				// box1.clientHeight = 300;
+
+
+
+				/* MARK: offsetWidth 和 offsetHeight
+				 * 	- 获取元素的整个的宽度和高度，包括内容区、内边距和边框
+				 */
+				console.log("offsetWidth==" + box1.offsetWidth);
+				// offsetWidth==140
+				console.log("offsetHeight==" + box1.offsetHeight);
+				// offsetHeight==140
+
+
+
+				/* MARK: offsetParent
+				 * 	- 可以用来获取当前元素的定位父元素
+				 *  - 会获取到离当前元素最近的开启了定位的祖先元素
+				 * 		如果所有的祖先元素都没有开启定位，则返回body
+				 */
+				var op = box1.offsetParent;
+				console.log(op);
+
+
+
+				/* MARK: offsetLeft 和 offsetTop
+				 * offsetLeft - 当前元素相对于其定位父元素的水平偏移量
+				 * 	offsetTop - 当前元素相对于其定位父元素的垂直偏移量
+				 */
+				console.log("box1.offsetLeft==" + box1.offsetLeft);
+				console.log("box1.offsetTop==" + box1.offsetTop);
+
+
+
+				/* MARK: scrollWidth 和 scrollHeight
+				 * 	- 可以获取元素整个滚动区域的宽度和高度
+				 */
+				console.log("box4.scrollWidth==" + box4.scrollWidth);
+				// box4.scrollWidth==450
+
+				console.log("box4.scrollHeight==" + box4.scrollHeight);
+				// box4.scrollHeight==600
+
+				// 可见高度
+				console.log("box4.clientHeight==" + box4.clientHeight)
+				// box4.clientHeight==285
+
+
+
+				/* MARK: scrollLeft 和 scrollTop
+				 * scrollLeft - 可以获取水平滚动条滚动的距离，没有滚动时为0px
+				 * scrollTop - 可以获取垂直滚动条滚动的距离，没有滚动时是0px
+				 */
+				console.log("box4.scrollLeft==" + box4.scrollLeft);
+				// box4.scrollLeft==26
+				console.log("box4.scrollTop==" + box4.scrollTop);
+				// box4.scrollTop==71
+
+				// 当满足scrollHeight - clientHeight == scrollTop
+				// 说明垂直滚动条滚动到底了
+				if (box4.scrollTop == (box4.scrollHeight - box4.clientHeight)) {
+					console.log("说明垂直滚动条滚动到底了");
+				}
+
+				// 当满足scrollWidth - clientWidth == scrollLeft
+				// 说明水平滚动条滚动到底
+				if (box4.scrollLeft == (box4.scrollWidth - box4.clientWidth)) {
+					console.log("说明水平滚动条滚动到底");
+				}
+			};
+
+		};
+	</script>
+</head>
+
+<body>
+	<button id="btn01">点我一下</button>
+	<!-- <br> -->
+	<!-- <br> -->
+
+	<div id="box4">
+		<div id="box5"></div>
+	</div>
+
+	<!-- <br> -->
+	<!-- <br> -->
+
+	<div id="box3">
+		<div id="box2" style="position: relative;">
+			<div id="box1"></div>
+		</div>
+	</div>
+</body>
+
+</html>
