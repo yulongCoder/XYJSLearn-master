@@ -37,12 +37,22 @@
 		};
 
 		var mc = new MyClass();
-
 		var mc2 = new MyClass();
 
-		//console.log(MyClass.prototype);
-		//console.log(mc2.__proto__ == MyClass.prototype);
+		// 通过构造函数获取原型对象
+		console.log(MyClass.prototype);
+		// 等同于
+		console.log(mc2.constructor.prototype);
+		console.log(mc2.constructor === MyClass); // true
+	
 
+		// 通过具体的对象获取原型对象
+		console.log(Object.getPrototypeOf(mc));
+		console.log(mc.__proto__);
+		console.log(mc2.__proto__);
+		console.log(mc2.__proto__ == MyClass.prototype); // true
+
+		
 		//向mc中添加a属性
 		mc.a = "我是mc中的a";
 
