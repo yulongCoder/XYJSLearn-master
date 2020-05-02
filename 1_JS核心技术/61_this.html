@@ -13,13 +13,19 @@
 		 * 		1.以函数的形式调用时，this永远都是window
 		 * 		2.以方法的形式调用时，this就是调用方法的那个对象
 		 */
+		var name = "全局的name属性";
 
 		function fun() {
-			//console.log("a = "+a+", b = "+b);
-			console.log(this.name);
+			console.log("这里永远都是全局===", name);
+			console.log("调用对象的属性name==", this.name);
 		}
 
-		//fun();
+
+		// 以函数形式调用，this是window
+		fun();
+		// 上面等同于
+		window.fun();
+
 
 		//创建一个对象
 		var obj = {
@@ -31,15 +37,11 @@
 			name: "沙和尚",
 			sayName: fun
 		};
-
-		//console.log(obj.sayName == fun);
-		var name = "全局的name属性";
-		//obj.sayName();
-		//以函数形式调用，this是window
-		//fun();
+		
+		console.log(obj.sayName == fun);
 
 		//以方法的形式调用，this是调用方法的对象
-		//obj.sayName();
+		obj.sayName();
 		obj2.sayName();
 	</script>
 </head>
