@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>07_面试题2</title>
+</head>
+
+<body>
+  <script type="text/javascript">
+    function fun(n, o) {
+      console.log(n);
+      console.log(o);
+      console.log("----->");
+      return {
+        sayHello: function (m) {
+          return fun(m, n)
+        }
+      };
+    }
+
+    // var b = fun(0).sayHello(1).sayHello(2).sayHello(3); //undefined,0,1,2
+
+    var f1 = fun(0);
+    /*
+    function fun(n, o)
+
+    n为0，o是undefined
+    所以 console.log(o); 输出 undefined
+    此时闭包中保存的是n为0
+    */
+
+    f2 = f1.sayHello(1);
+    /*
+    调用这个函数 fun(m, n)
+    因为 n 取闭包中保存的0。所以
+    等于调用 fun(1, 0)
+
+    function fun(n, o)
+    所以 n 是1，o是0
+
+    console.log(o); 输出0
+
+    此时产生一个新的闭包，保存n为1
+    */
+    
+
+    f3 = f2.sayHello(2);
+    /*
+    调用这个函数 fun(m, n)
+    因为 n 取闭包中保存的1。所以
+    等于调用 fun(2, 1)
+
+    function fun(n, o)
+    所以 n 是2，o是1
+
+    console.log(o); 输出1
+
+    此时产生一个新的闭包，保存n为2
+    */
+    
+
+    f4 = f3.sayHello(3);
+    /*
+    调用这个函数 fun(m, n)
+    因为 n 取闭包中保存的2。所以
+    等于调用 fun(3, 2)
+
+    function fun(n, o)
+    所以 n 是3，o是2
+
+    console.log(o); 输出2
+
+    此时产生一个新的闭包，保存n为3
+    */
+    
+  
+  </script>
+</body>
+
+</html>

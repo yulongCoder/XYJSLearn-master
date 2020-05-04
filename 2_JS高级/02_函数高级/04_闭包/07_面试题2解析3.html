@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>07_面试题2</title>
+</head>
+
+<body>
+  <script type="text/javascript">
+    function fun(n, o) {
+      console.log(n);
+      console.log(o);
+      console.log("----->");
+      return {
+        sayHello: function (m) {
+          return fun(m, n)
+        }
+      };
+    }
+
+    var c = fun(0).sayHello(1)
+
+
+    c.sayHello(2)
+    /*
+    第二个闭包，n保存的是1
+
+    相当于
+    fun(2, 1)
+    */
+
+
+    c.sayHello(3) 
+    /*
+    第二个闭包，n保存的是1
+
+    相当于
+    fun(3, 1)
+    */
+    
+    
+    //undefined,0,1,1
+
+  </script>
+</body>
+
+</html>
