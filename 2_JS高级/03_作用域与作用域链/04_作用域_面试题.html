@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>04_作用域_面试题</title>
+</head>
+
+<body>
+  <script type="text/javascript">
+    var x = 10;
+
+    function fn() {
+      // 这里没有形式参数，x是全局变量中的x
+      console.log(x);
+    }
+
+    function show(f) {
+      var x = 20;
+      f();
+    }
+    show(fn);
+
+    // 输出 10
+    
+  </script>
+</body>
+
+</html>
