@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>00_引入</title>
+</head>
+
+<body>
+
+  <button>测试1</button>
+  <button>测试2</button>
+  <button>测试3</button>
+
+  <!--
+  需求: 点击某个按钮, 提示"点击的是第n个按钮"
+  -->
+  <script type="text/javascript">
+    // btns 是一个伪数组
+    var btns = document.getElementsByTagName('button');
+    console.log('btns==', btns);
+
+    // 有问题，注意这个 var i; 是全局的，它不再函数中
+    for (var i = 0, length = btns.length; i < length; i++) {
+      var btn = btns[i];
+      btn.onclick = function () {
+        console.log("i==", i); // i== 3
+      };
+    }
+
+    // 这里也能访问i
+    // 注意 var i; 是全局的，它不再函数中
+    console.log("i==", i); // i== 3
+
+
+
+    // 解决一: 保存下标
+    // for (var i = 0, length = btns.length; i < length; i++) {
+    //   var btn = btns[i];
+    //   // 将 btn 所对应的下标保存在 btn 上
+    //   btn.index = i; 
+    //   btn.onclick = function () {
+    //     console.log("index==", this.index);
+    //   };
+    // }
+
+    // 解决办法: 利用闭包
+    // for (var i = 0, length = btns.length; i < length; i++) {
+    //   (function (i) {
+    //     var btn = btns[i];
+    //     btn.onclick = function () {
+    //       console.log("闭包i==", i);
+    //     };
+    //   })(i);
+    // }
+  </script>
+</body>
+
+</html>
