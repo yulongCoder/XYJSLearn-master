@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>04_作用域_面试题2</title>
+</head>
+
+<body>
+  <script type="text/javascript">
+    var fn = function () {
+      // 变量 fn 在这个函数的作用域中没有找到，
+      // 再向上一层寻找，在全局作用域中找到了
+      console.log(fn)
+    }
+    fn()
+
+
+    var obj = {
+      fn2: function () {
+
+        // 变量 fn2 在这个函数的作用域中没有找到，
+        // 再向上一层寻找，注意obj的这个对象{}不是作用域，
+        // 然后在全局作用域中也没有找到，所以报错
+        // Uncaught ReferenceError: fn2 is not defined at Object.fn2
+        // console.log(fn2)
+
+        // 这个不报错
+        console.log("this.fn2==", this.fn2)
+      }
+    }
+    obj.fn2()
+  </script>
+</body>
+
+</html>
