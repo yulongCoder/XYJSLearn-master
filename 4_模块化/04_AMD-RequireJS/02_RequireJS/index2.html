@@ -1,0 +1,17 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Modular Demo 2</title>
+    <script type="text/javascript" src="js/libs/require.js" data-main="js/main.js"></script>
+</head>
+
+<body>
+    
+    <form name="myForm">
+        用户名: <input type="text" name="username" ng-model="username" ng-required="true">
+        <div style="color: red;" ng-show="myForm.username.$dirty&&myForm.username.$invalid">用户名是必须的</div>
+    </form>
+</body>
+
+</html>
